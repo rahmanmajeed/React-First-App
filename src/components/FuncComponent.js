@@ -1,10 +1,11 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import Button from './Button';
 
 class ClockFunc extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { date: new Date() };
+        this.state = { date: new Date(), locale: 'bn-BD' };
     }
 
     // lifecycle method
@@ -29,9 +30,12 @@ class ClockFunc extends React.Component {
     // dedicated render method
     render() {
         return (
-            <h1>
-                <span className="text">{this.state.date.toLocaleTimeString()}</span>
-            </h1>
+            <div>
+                <h1>
+                    <span className="text">{this.state.date.toLocaleTimeString()}</span>
+                </h1>
+                <Button locale={this.state.locale} />
+            </div>
         );
     }
 }

@@ -1,13 +1,13 @@
 import './App.css';
 import Clock from './components/Clock';
-import ClockFunc from './components/FuncComponent';
 
 function App() {
     return (
         <div className="App">
-            <Clock locale="bn-BD" />
+            <Clock />
             <div>
-                <ClockFunc locale="en-GB" />
+                {/* <ClockFunc locale="en-GB" /> */}
+                {/* <Toggle /> */}
             </div>
         </div>
     );

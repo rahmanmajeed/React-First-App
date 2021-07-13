@@ -1,41 +1,42 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import Button from './Button';
 
 class Clock extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { date: new Date() };
-    }
+    state = { date: new Date(), locale: 'bn-BD' };
 
-    // lifecycle method
     componentDidMount() {
-        this.timeID = setInterval(() => {
-            this.tick();
-        }, 1000);
+        this.clockTimer = setInterval(() => this.tick(), 1000);
     }
 
-    // lifecycle method
     componentWillUnmount() {
-        clearInterval(this.timeID);
+        clearInterval(this.clockTimer);
     }
 
-    // custom methods
+    handleClick = (locale) => {
+        this.setState({
+            locale,
+        });
+    };
+
     tick() {
         this.setState({
             date: new Date(),
         });
     }
 
-    // dedicated render method
-
     render() {
+        const { date, locale } = this.state;
         return (
-            <h1>
-                <span className="text">
-                    {this.state.date.toLocaleTimeString(this.props.locale)}
-                </span>
-            </h1>
+            <div>
+                <h1 className="heading">
+                    <span className="text">{date.toLocaleTimeString(locale)}</span>
+                </h1>
+                {locale === 'bn-BD' ? (
+                    <Button change={this.handleClick} locale="en-US" show={false} />
+                ) : (
+                    <Button change={this.handleClick} locale="bn-BD" show />
+                )}
+            </div>
         );
     }
 }
